@@ -1,0 +1,817 @@
+/* ==================================================
+   RESET & BASE
+================================================== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+
+html, body {
+  width: 100%;
+  overflow-x: hidden; /* CRITICAL */
+}
+
+body {
+  background: #0b0f19;
+  color: #ffffff;
+  line-height: 1.6;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+/* ==================================================
+   NAVBAR — DESKTOP
+================================================== */
+
+.nav {
+  position: sticky;
+  top: 0;
+  background: rgba(11,15,25,0.95);
+  backdrop-filter: blur(10px);
+  z-index: 1000;
+}
+
+.nav-container {
+  max-width: 1200px;
+  margin: auto;
+  padding: 16px 24px;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.logo {
+  font-size: 24px;
+  font-weight: 800;
+}
+
+.logo span {
+  color: #22c55e;
+}
+
+/* DESKTOP LINKS */
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 28px;
+}
+
+.nav-links a {
+  font-size: 15px;
+  font-weight: 500;
+}
+
+.btn {
+  padding: 8px 16px;
+  border: 1px solid #22c55e;
+  border-radius: 6px;
+}
+
+/* HIDE MOBILE ELEMENTS ON DESKTOP */
+.menu-toggle,
+.close-nav,
+.nav-backdrop {
+  display: none;
+}
+
+/* ==================================================
+   MOBILE OFF-CANVAS (TRUE)
+================================================== */
+
+@media (max-width: 900px) {
+
+  .menu-toggle {
+    display: block;
+    background: none;
+    border: none;
+    color: #ffffff;
+    font-size: 28px;
+    cursor: pointer;
+  }
+
+  /* OFF-CANVAS — PHYSICALLY OUTSIDE VIEWPORT */
+  .nav-links {
+    position: fixed;
+    top: 0;
+    right: -280px; /* 👈 key fix */
+
+    width: 280px;
+    height: 100vh;
+
+    background: #020617;
+    padding: 24px 20px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 18px;
+
+    visibility: hidden;
+    pointer-events: none;
+
+    transition: right 0.35s ease, visibility 0.35s ease;
+    box-shadow: -12px 0 30px rgba(0,0,0,0.45);
+
+    z-index: 1001;
+  }
+
+  .nav-links.active {
+    right: 0;
+    visibility: visible;
+    pointer-events: auto;
+  }
+
+  .close-nav {
+    display: block;
+    align-self: flex-end;
+    background: none;
+    border: none;
+    color: #ffffff;
+    font-size: 26px;
+    cursor: pointer;
+    margin-bottom: 16px;
+  }
+
+  /* BACKDROP */
+  .nav-backdrop {
+    display: block;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.55);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.35s ease;
+    z-index: 1000;
+  }
+
+  .nav-backdrop.active {
+    opacity: 1;
+    pointer-events: auto;
+  }
+}
+
+/* ==================================================
+   HERO
+================================================== */
+
+.hero {
+  min-height: 90vh;
+  background: url("https://images.unsplash.com/photo-1517927033932-b3d18e61fb3a")
+    center / cover no-repeat;
+  position: relative;
+
+  display: flex;
+  align-items: center;
+  padding: clamp(40px, 6vw, 96px);
+}
+
+.hero-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to right,
+    rgba(0,0,0,0.75),
+    rgba(0,0,0,0.35)
+  );
+}
+
+.hero-text {
+  position: relative;
+  max-width: 640px;
+}
+
+.hero h1 {
+  font-size: clamp(2.4rem, 5vw, 4rem);
+  margin-bottom: 16px;
+}
+
+.hero p {
+  color: #cbd5e1;
+  margin-bottom: 24px;
+}
+
+.primary-btn {
+  padding: 14px 28px;
+  background: #22c55e;
+  border: none;
+  border-radius: 8px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+/* ==================================================
+   SECTIONS
+================================================== */
+
+section {
+  padding: clamp(64px, 8vw, 96px) clamp(20px, 6vw, 96px);
+}
+
+.trust {
+  text-align: center;
+  color: #94a3b8;
+}
+
+.how-grid {
+  display: grid;
+  gap: 24px;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+}
+
+.card {
+  background: #111827;
+  padding: 28px;
+  border-radius: 12px;
+}
+
+/* ==================================================
+   FOOTER
+================================================== */
+
+.footer {
+  background: #020617;
+  padding: 40px 24px;
+}
+
+.footer-bottom {
+  text-align: center;
+  font-size: 13px;
+  color: #64748b;
+}
+
+/* ==================================================
+   TYPOGRAPHY HELPERS
+================================================== */
+
+h2 {
+  font-size: clamp(1.6rem, 3vw, 2.2rem);
+  margin-bottom: 40px;
+  text-align: center;
+}
+
+h3 {
+  font-size: 1.1rem;
+  margin-bottom: 8px;
+}
+
+p {
+  font-size: 0.95rem;
+}
+
+/* ==================================================
+   HOW / MODES / SCORING GRIDS
+================================================== */
+
+.mode-grid,
+.score-grid {
+  display: grid;
+  gap: 24px;
+}
+
+/* MODES */
+.mode-grid {
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+}
+
+.mode {
+  background: #0f172a;
+  padding: 24px;
+  border-radius: 12px;
+}
+
+/* ==================================================
+   SPLIT SECTION (IMAGE + TEXT)
+================================================== */
+
+.split {
+  display: grid;
+  gap: 40px;
+  align-items: center;
+}
+
+.split img {
+  width: 100%;
+  border-radius: 16px;
+}
+
+@media (min-width: 900px) {
+  .split {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+/* ==================================================
+   SCORING
+================================================== */
+
+.score-grid {
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+}
+
+.score-grid div {
+  background: #111827;
+  padding: 20px;
+  text-align: center;
+  border-radius: 10px;
+  font-size: 0.9rem;
+}
+
+/* ==================================================
+   CTA STRIP
+================================================== */
+
+.cta-strip {
+  background: linear-gradient(135deg, #22c55e, #16a34a);
+  color: #000;
+  text-align: center;
+}
+
+.cta-strip h2 {
+  margin-bottom: 16px;
+}
+
+/* ==================================================
+   FOOTER (FULL)
+================================================== */
+
+.footer {
+  background: #020617;
+  padding: 72px clamp(20px, 6vw, 96px) 32px;
+}
+
+.footer-grid {
+  display: grid;
+  gap: 40px;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+}
+
+.footer h3,
+.footer h4 {
+  margin-bottom: 12px;
+}
+
+.footer h3 span {
+  color: #22c55e;
+}
+
+.footer a,
+.footer p {
+  color: #94a3b8;
+  font-size: 14px;
+  margin-bottom: 10px;
+  display: block;
+}
+
+.footer-bottom {
+  text-align: center;
+  font-size: 13px;
+  color: #64748b;
+  margin-top: 40px;
+}
+
+/* ==================================================
+   HOW IT WORKS PAGE — VISUAL POLISH
+================================================== */
+
+/* SMALLER HERO */
+.hero-small {
+  min-height: 60vh;
+}
+
+/* SECTION HEADERS */
+.section-header {
+  max-width: 640px;
+  margin: 0 auto 56px;
+  text-align: center;
+}
+
+.section-header h2 {
+  margin-bottom: 12px;
+}
+
+.section-header p {
+  color: #94a3b8;
+  font-size: 1rem;
+}
+
+/* STEP FLOW */
+.how-flow {
+  position: relative;
+}
+
+.step-grid {
+  display: grid;
+  gap: 32px;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+}
+
+/* STEP CARD */
+.step {
+  background: linear-gradient(
+    180deg,
+    #111827 0%,
+    #0f172a 100%
+  );
+  padding: 32px 28px;
+  border-radius: 16px;
+  position: relative;
+  overflow: hidden;
+}
+
+/* LARGE STEP NUMBER */
+.step span {
+  position: absolute;
+  top: 18px;
+  right: 22px;
+  font-size: 36px;
+  font-weight: 900;
+  color: rgba(34,197,94,0.15);
+  pointer-events: none;
+}
+
+.step h3 {
+  margin-bottom: 8px;
+  font-size: 1.05rem;
+}
+
+.step p {
+  color: #cbd5e1;
+  font-size: 0.95rem;
+  max-width: 90%;
+}
+
+/* SUBTLE HOVER (DESKTOP ONLY) */
+@media (hover: hover) {
+  .step:hover {
+    transform: translateY(-4px);
+    transition: transform 0.25s ease;
+  }
+}
+
+/* SPLIT TEXT POLISH */
+.split h2 {
+  margin-bottom: 16px;
+}
+
+.split p {
+  color: #cbd5e1;
+  margin-bottom: 16px;
+}
+
+/* SCORING GRID POLISH */
+.score-grid div {
+  background: linear-gradient(
+    180deg,
+    #111827 0%,
+    #0f172a 100%
+  );
+  font-weight: 500;
+}
+
+/* CTA EMPHASIS */
+.cta-strip {
+  padding: 96px 24px;
+}
+
+.cta-strip h2 {
+  margin-bottom: 20px;
+}
+
+/* ==================================================
+   LEAGUES PAGE
+================================================== */
+
+.leagues-section {
+  position: relative;
+}
+
+/* GRID */
+.league-grid {
+  display: grid;
+  gap: 32px;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+}
+
+/* CARD */
+.league-card {
+  background: linear-gradient(
+    180deg,
+    #111827 0%,
+    #0f172a 100%
+  );
+  padding: 32px 28px;
+  border-radius: 18px;
+  position: relative;
+}
+
+/* TAG */
+.league-tag {
+  position: absolute;
+  top: 18px;
+  right: 20px;
+  font-size: 12px;
+  font-weight: 600;
+  background: rgba(34,197,94,0.15);
+  color: #22c55e;
+  padding: 4px 10px;
+  border-radius: 999px;
+}
+
+.league-tag.private {
+  background: rgba(99,102,241,0.15);
+  color: #818cf8;
+}
+
+.league-tag.fast {
+  background: rgba(245,158,11,0.15);
+  color: #fbbf24;
+}
+
+/* TEXT */
+.league-card h3 {
+  margin-bottom: 12px;
+}
+
+.league-desc {
+  color: #cbd5e1;
+  margin-bottom: 20px;
+  font-size: 0.95rem;
+}
+
+/* FEATURES */
+.league-features {
+  list-style: none;
+  margin-bottom: 24px;
+}
+
+.league-features li {
+  position: relative;
+  padding-left: 20px;
+  margin-bottom: 10px;
+  font-size: 0.9rem;
+}
+
+.league-features li::before {
+  content: "•";
+  position: absolute;
+  left: 0;
+  color: #22c55e;
+}
+
+/* CTA BUTTON */
+.league-card .primary-btn {
+  width: 100%;
+}
+
+/* HOVER POLISH (DESKTOP) */
+@media (hover: hover) {
+  .league-card:hover {
+    transform: translateY(-4px);
+    transition: transform 0.25s ease;
+  }
+}
+
+/* ==================================================
+   LEAGUES PAGE — ENHANCED VISUALS
+================================================== */
+
+/* EMPHASIS SECTION */
+.dark-section {
+  background: #020617;
+}
+
+/* EXPLAIN GRID */
+.explain-grid {
+  display: grid;
+  gap: 32px;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+}
+
+.explain-grid h4 {
+  margin-bottom: 8px;
+}
+
+.explain-grid p {
+  color: #cbd5e1;
+  font-size: 0.95rem;
+}
+
+/* LEAGUE CARD HIGHLIGHT */
+.league-card.highlight {
+  outline: 2px solid rgba(34,197,94,0.3);
+}
+
+/* SUBTLE SECTION SEPARATION */
+.leagues-section,
+.league-explain,
+.split {
+  position: relative;
+}
+
+/* ==================================================
+   SCORING PAGE
+================================================== */
+
+/* OVERVIEW */
+.scoring-overview {
+  position: relative;
+}
+
+.overview-grid {
+  display: grid;
+  gap: 32px;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+}
+
+.overview-grid h4 {
+  margin-bottom: 8px;
+}
+
+.overview-grid p {
+  color: #cbd5e1;
+  font-size: 0.95rem;
+}
+
+/* CORE SCORING */
+.score-card-grid {
+  display: grid;
+  gap: 32px;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+}
+
+.score-card {
+  background: linear-gradient(
+    180deg,
+    #111827 0%,
+    #0f172a 100%
+  );
+  padding: 32px 28px;
+  border-radius: 18px;
+}
+
+.score-card h3 {
+  margin-bottom: 10px;
+}
+
+.score-card p {
+  color: #cbd5e1;
+  font-size: 0.95rem;
+}
+
+/* POSITION SCORING */
+.position-grid {
+  display: grid;
+  gap: 32px;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+}
+
+.position-card {
+  background: #111827;
+  padding: 28px;
+  border-radius: 16px;
+}
+
+.position-card h4 {
+  margin-bottom: 8px;
+}
+
+.position-card p {
+  color: #cbd5e1;
+  font-size: 0.95rem;
+}
+
+/* DATA BOX */
+.data-box {
+  background: #111827;
+  padding: 32px;
+  border-radius: 16px;
+}
+
+.data-box h4 {
+  margin-bottom: 12px;
+}
+
+.data-box ul {
+  list-style: none;
+}
+
+.data-box li {
+  margin-bottom: 8px;
+  color: #cbd5e1;
+  font-size: 0.9rem;
+}
+
+/* ==================================================
+   SCORING PAGE — ENHANCED POLISH
+================================================== */
+
+.scoring-intro {
+  text-align: center;
+}
+
+.intro-highlights {
+  display: grid;
+  gap: 24px;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  max-width: 720px;
+  margin: 40px auto 0;
+}
+
+.intro-highlights strong {
+  display: block;
+  margin-bottom: 6px;
+  color: #22c55e;
+}
+
+/* SCORE ICON */
+.score-icon {
+  font-size: 28px;
+  display: inline-block;
+  margin-bottom: 12px;
+}
+
+/* SCORE CARDS */
+.score-card {
+  position: relative;
+}
+
+/* POSITION GRID */
+.position-card {
+  transition: transform 0.25s ease;
+}
+
+@media (hover: hover) {
+  .position-card:hover {
+    transform: translateY(-4px);
+  }
+}
+
+/* =========================================
+   NAVBAR HOVER + INTERACTION FIX (SAFE PATCH)
+   Does NOT affect other pages
+========================================= */
+
+/* Ensure nav is clickable */
+.nav {
+  position: relative;
+  z-index: 1000;
+  overflow: visible;
+}
+
+/* Desktop nav layout */
+@media (min-width: 769px) {
+  .nav-links {
+    position: static !important;
+    display: flex !important;
+    align-items: center;
+    gap: 32px;
+    background: transparent !important;
+    height: auto !important;
+    transform: none !important;
+  }
+
+  .nav-backdrop {
+    display: none !important;
+    pointer-events: none !important;
+  }
+}
+
+/* Enable hover */
+.nav-links a {
+  position: relative;
+  pointer-events: auto;
+}
+
+.nav-links a:hover {
+  color: #4cff8f;
+}
+
+/* Optional underline hover (non-destructive) */
+.nav-links a::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -4px;
+  width: 0%;
+  height: 2px;
+  background: #4cff8f;
+  transition: width 0.25s ease;
+}
+
+.nav-links a:hover::after {
+  width: 100%;
+}
+
+/* Prevent mobile overlay blocking desktop */
+@media (min-width: 769px) {
+  .nav-backdrop {
+    opacity: 0 !important;
+    visibility: hidden !important;
+  }
+}
